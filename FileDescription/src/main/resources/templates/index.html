@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Просмотр, загрузка, удаление файлов</title>
+</head>
+
+<body>
+<form method="GET" th:action="@{/}">
+    <input type="submit" value="Обновить">
+</form>
+<hr>
+<h3>Список файлов в папке</h3>
+
+<ul th:each="file : ${files}" style="border:1px solid #ccc;padding:5px;">
+    <p th:text="${'Файл = ' + file.getFileName()
+    + '.' + file.getExtension() +'; Размер = ' + file.getSize()
+    + 'Байт; Дата создания = ' + file.getCreatedTime() + ';'}"></p>
+    <form method="GET" th:action="@{/{id}/descriptor(id=${file.getId()})}">
+        <input type="submit" value="Посмотреть JSON">
+    </form>
+    <form method="GET" th:action="@{/{id}(id=${file.getId()})}">
+        <input type="submit" value="Скачать">
+    </form>
+    <form th:method="DELETE" th:action="@{/{id}(id=${file.getId()})}">
+        <input type="submit" value="Удалить">
+    </form>
+</ul>
+<hr>
+<form method="POST" enctype="multipart/form-data" th:action="@{/}">
+    Загрузка файла: <input type="file" name="file"><br/>
+    <input type="submit" value="Загрузить">
+</form>
+<hr>
+
+</body>
+</html>
