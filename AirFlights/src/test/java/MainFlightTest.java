@@ -91,6 +91,13 @@ public class MainFlightTest {
         String expected = getStringToFlight(testList);
         assertEquals(expected, output.toString());
     }
+    @Test()
+    @DisplayName("Отображаем все рейсы без параметров")
+    void assertAllFlights(){
+        utilFlight.printInfo(FlightBuilder.createFlights());
+        String expected = getStringToFlight(testList);
+        assertEquals(expected, output.toString());
+    }
 
     private String getStringToFlight(List<FlightForTest> flightForTests) {
         StringBuilder sb = new StringBuilder();
