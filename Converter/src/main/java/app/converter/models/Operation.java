@@ -1,4 +1,4 @@
-package application.converter.models;
+package app.converter.models;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -15,9 +15,7 @@ public class Operation {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
     private BigDecimal value;
-    @OneToOne
-    private Currency fromCurrency;
-    @OneToOne
-    private Currency toCurrency;
+    private String fromCurrency;
+    private String toCurrency;
 
 }

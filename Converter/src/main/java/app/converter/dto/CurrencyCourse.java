@@ -1,4 +1,4 @@
-package application.converter.models;
+package app.converter.dto;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -7,20 +7,12 @@ import lombok.ToString;
 import lombok.experimental.SuperBuilder;
 
 import java.math.BigDecimal;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
 
-@Entity
-@Table(name = "currencies")
 @SuperBuilder
 @RequiredArgsConstructor
 @Getter@Setter
 @ToString
-public class Currency {
-    @Id
-    @Column(name = "id")
+public class CurrencyCourse {
     private String charCode;
     private Integer nominal;
     private String name;

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+    <style>
+        #login_form {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        login_item {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+<div id="login_form">
+    <hr>
+    <h2>Регистрация</h2>
+    <hr>
+    <form th:method="POST" th:action="@{/auth/registration}" th:object="${user}">
+        <label class="login_item" for="username">Введите имя пользователя: </label>
+        <br>
+        <input class="login_item" type="text" th:field="*{username}" placeholder="enter username" id="username"/>
+        <div class="login_item" style="color:red" th:if="${#fields.hasErrors('username')}" th:errors="*{username}">
+            Username Error
+        </div>
+        <hr>
+        <label class="login_item" for="password">Введите пароль: </label>
+        <br>
+        <input class="login_item" type="password" th:field="*{password}" placeholder="enter password" id="password"/>
+        <div class="login_item" style="color:red" th:if="${#fields.hasErrors('password')}" th:errors="*{password}">
+            Password Error
+        </div>
+        <hr>
+        <input class="login_item" type="submit" value="Зарегистрироваться"/>
+    </form>
+    <hr>
+    <form method="GET" th:action="@{/auth/login}">
+        <input type="submit" value="Авторизация">
+    </form>
+    <br>
+</div>
+</body>
+</html>

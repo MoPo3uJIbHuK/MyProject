@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Converters Currency</title>
+    <style>
+        .general {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .currencyCourse {
+            height: 300px;
+            width: 600px;
+            margin: auto;
+            overflow: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div class="general">
+    <hr>
+    <h2>Конвертер</h2>
+    <hr>
+    <form th:object="${user}" method='POST'>
+        <table>
+            <tr>
+                <td>
+                    <select name="Валюта из">
+                        <option th:each="charCode : ${currencyCharCodeList}"
+                                th:value="${charCode}"
+                                th:utext="${charCode}">
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select name="Валюта в">
+                        <option th:each="charCode : ${currencyCharCodeList}"
+                                th:value="${charCode}"
+                                th:utext="${charCode}">
+                        </option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="number" placeholder="Введите колличество валюты" name="Валюта"/>
+                </td>
+                <p text="!!!!!!" th:name="123123"></p>
+                <td>
+
+                </td>
+            </tr>
+            <tr>
+                <td><input name="submit" type="submit" value="submit"/></td>
+            </tr>
+        </table>
+    </form>
+    <div class="currencyCourse">
+        <table>
+            <thead>
+            <tr>
+                <th>id</th>
+                <th>nominal</th>
+                <th>name</th>
+                <th>value</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="currencyCourse : ${currencyCourseList}">
+                <td th:text="${currencyCourse.charCode}"></td>
+                <td th:text="${currencyCourse.nominal}"></td>
+                <td th:text="${currencyCourse.name}"></td>
+                <td th:text="${currencyCourse.value}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>
