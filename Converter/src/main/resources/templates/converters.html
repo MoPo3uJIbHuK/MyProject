@@ -36,59 +36,72 @@
 </head>
 <body>
 <div class="general">
+    <form method="GET" th:action="@{/converters/history}">
+        <input type="submit" value="История">
+    </form>
     <hr>
     <h2>Конвертер</h2>
     <hr>
-    <form th:object="${user}" method='POST'>
+    <form th:action="@{/converters}" th:object="${user}" method='POST'>
         <table>
             <tr>
                 <td>
-                    <select name="Валюта из">
-                        <option th:each="charCode : ${currencyCharCodeList}"
-                                th:value="${charCode}"
-                                th:utext="${charCode}">
-                        </option>
-                    </select>
-                </td>
-                <td>
-                    <select name="Валюта в">
-                        <option th:each="charCode : ${currencyCharCodeList}"
-                                th:value="${charCode}"
-                                th:utext="${charCode}">
-                        </option>
-                    </select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <input type="number" placeholder="Введите колличество валюты" name="Валюта"/>
-                </td>
-                <p text="!!!!!!" th:name="123123"></p>
-                <td>
+                    <select name="fromCharCode">
 
+                        Код валюты:
+                        <option th:each="charCode : ${currencyCharCodeList}"
+                                th:value="${charCode}"
+                                th:utext="${charCode}">
+                        </option>
+                    </select>
+                </td>
+                <td>
+                    <select name="toCharCode">
+                        <option th:each="charCode : ${currencyCharCodeList}"
+                                th:value="${charCode}"
+                                th:utext="${charCode}">
+                        </option>
+                    </select>
                 </td>
             </tr>
             <tr>
-                <td><input name="submit" type="submit" value="submit"/></td>
+                <td>
+                    <input type="number" placeholder="Введите сумму" name="value"/>
+                </td>
+                <td>
+                    <div th:if="${result !=null}">
+                        <p th:text="${'Ввели = ' + value + ' ' + fromCharCode}"></p>
+                        <p th:text="${'Получили = ' + result + ' ' + toCharCode}"></p>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Конвертировать"/></td>
             </tr>
         </table>
     </form>
-    <div class="currencyCourse">
+    <hr>
+    <h2>Курс валют на сегодня по отношению к Рублю</h2>
+    <hr>
+    <form method="POST" th:action="@{/converters/changeState}">
+        <input type="submit" value="Скрыть/показать">
+    </form>
+    <div class="currencyCourse" th:if="${isShow}">
         <table>
             <thead>
             <tr>
-                <th>id</th>
-                <th>nominal</th>
-                <th>name</th>
-                <th>value</th>
+                <th>Код</th>
+                <th>Название</th>
+                <th>Значение</th>
+                <th>Номинал</th>
             </tr>
             </thead>
             <tbody>
             <tr th:each="currencyCourse : ${currencyCourseList}">
-                <td th:text="${currencyCourse.charCode}"></td>
-                <td th:text="${currencyCourse.nominal}"></td>
-                <td th:text="${currencyCourse.name}"></td>
-                <td th:text="${currencyCourse.value}"></td>
+                <td th:text="${currencyCourse.getCharCode()}"></td>
+                <td th:text="${currencyCourse.getName()}"></td>
+                <td th:text="${currencyCourse.getValue()}"></td>
+                <td th:text="${currencyCourse.getNominal()}"></td>
             </tr>
             </tbody>
         </table>

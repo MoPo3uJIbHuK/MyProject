@@ -40,14 +40,14 @@ public class CbrXmlMappingToCurrency {
     }
 
     private Map<String, CurrencyCourse> getCurrenciesCourseCertainDate(LocalDate date) {
-        Map<String, CurrencyCourse> currencies = new HashMap();
+        Map<String, CurrencyCourse> currencies = new LinkedHashMap<>();
+        currencies.put(RUB.getCharCode(), RUB);
         NodeList nList = this.getDocument(date).getElementsByTagName("Valute");
         for (int i = 0; i < nList.getLength(); ++i) {
             Element element = (Element) nList.item(i);
             CurrencyCourse currencyCourse = CurrencyCourse.builder().name(this.getStringForCurrency(element, "Name")).charCode(this.getStringForCurrency(element, "CharCode")).nominal(Integer.parseInt(this.getStringForCurrency(element, "Nominal"))).value(this.getValueForCurrency(element)).build();
             currencies.put(currencyCourse.getCharCode(), currencyCourse);
         }
-        currencies.put(RUB.getCharCode(), RUB);
         return currencies;
     }
 

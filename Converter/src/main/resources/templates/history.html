@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Converters Story</title>
+    <style>
+        .general {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .operational {
+            height: 300px;
+            width: 600px;
+            margin: auto;
+            overflow: auto;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        thead th {
+            position: sticky;
+            top: 0;
+            background: white;
+        }
+
+        th, td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+<div class="general">
+    <form method="GET" th:action="@{/converters}">
+        <input type="submit" value="Главная">
+    </form>
+    <hr>
+    <h2>История операций</h2>
+    <hr>
+    <div class="operational">
+        <table>
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Валюта источник</th>
+                <th>Значение</th>
+                <th>Валюта назначения</th>
+                <th>Результат</th>
+                <th>Пользователь</th>
+                <th>Дата операции</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="operation : ${operations}">
+                <td th:text="${operation.getId()}"></td>
+                <td th:text="${operation.getFromCurrency()}"></td>
+                <td th:text="${operation.getValue()}"></td>
+                <td th:text="${operation.getToCurrency()}"></td>
+                <td th:text="${operation.getResult()}"></td>
+                <td th:text="${operation.getUser().getUsername()}"></td>
+                <td th:text="${operation.getDate()}"></td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+</body>
+</html>

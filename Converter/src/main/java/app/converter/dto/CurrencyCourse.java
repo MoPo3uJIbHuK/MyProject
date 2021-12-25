@@ -14,7 +14,7 @@ import java.math.BigDecimal;
 @ToString
 public class CurrencyCourse {
     private String charCode;
-    private Integer nominal;
+    private int nominal;
     private String name;
     private BigDecimal value;
 }
