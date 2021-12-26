@@ -39,27 +39,28 @@
     <form method="GET" th:action="@{/converters/history}">
         <input type="submit" value="История">
     </form>
+    <form method="POST" th:action="@{/logout}">
+        <input type="submit" value="Выход из пользователя">
+    </form>
     <hr>
     <h2>Конвертер</h2>
     <hr>
-    <form th:action="@{/converters}" th:object="${user}" method='POST'>
+    <form th:action="@{/converters}" th:object="${currencyList}" method='POST'>
         <table>
             <tr>
                 <td>
-                    <select name="fromCharCode">
-
-                        Код валюты:
-                        <option th:each="charCode : ${currencyCharCodeList}"
-                                th:value="${charCode}"
-                                th:utext="${charCode}">
+                    <select name="sourceCharCode">
+                        <option th:each="currency : ${currencyList}"
+                                th:value="${currency.getCharCode()}"
+                                th:utext="${currency.getCharCode() + ' (' + currency.getName() + ')'}">
                         </option>
                     </select>
                 </td>
                 <td>
-                    <select name="toCharCode">
-                        <option th:each="charCode : ${currencyCharCodeList}"
-                                th:value="${charCode}"
-                                th:utext="${charCode}">
+                    <select name="destinationCharCode">
+                        <option th:each="currency : ${currencyList}"
+                                th:value="${currency.getCharCode()}"
+                                th:utext="${currency.getCharCode() + ' (' + currency.getName() + ')'}">
                         </option>
                     </select>
                 </td>
@@ -70,8 +71,8 @@
                 </td>
                 <td>
                     <div th:if="${result !=null}">
-                        <p th:text="${'Ввели = ' + value + ' ' + fromCharCode}"></p>
-                        <p th:text="${'Получили = ' + result + ' ' + toCharCode}"></p>
+                        <p th:text="${'Ввели = ' + value + ' ' + sourceCharCode}"></p>
+                        <p th:text="${'Получили = ' + result + ' ' + destinationCharCode}"></p>
                     </div>
                 </td>
             </tr>

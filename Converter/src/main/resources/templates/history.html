@@ -58,9 +58,9 @@
             <tbody>
             <tr th:each="operation : ${operations}">
                 <td th:text="${operation.getId()}"></td>
-                <td th:text="${operation.getFromCurrency()}"></td>
+                <td th:text="${operation.getFromCurrency().getCharCode()}"></td>
                 <td th:text="${operation.getValue()}"></td>
-                <td th:text="${operation.getToCurrency()}"></td>
+                <td th:text="${operation.getToCurrency().getCharCode()}"></td>
                 <td th:text="${operation.getResult()}"></td>
                 <td th:text="${operation.getUser().getUsername()}"></td>
                 <td th:text="${operation.getDate()}"></td>

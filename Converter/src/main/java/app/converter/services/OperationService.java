@@ -1,5 +1,6 @@
 package app.converter.services;
 
+import app.converter.models.Currency;
 import app.converter.models.Operation;
 import app.converter.models.User;
 import app.converter.repositories.OperationsRepository;
@@ -14,7 +15,7 @@ public record OperationService(OperationsRepository operationsRepository) {
     public List<Operation> getOperations() {
         return operationsRepository.findAll();
     }
-    public void saveOperation(String fromCurrency, long value, String toCurrency,
+    public void saveOperation(Currency fromCurrency, long value, Currency toCurrency,
                               BigDecimal result, User user){
         Operation operation = Operation.builder().fromCurrency(fromCurrency)
                         .value(value).toCurrency(toCurrency).result(result)

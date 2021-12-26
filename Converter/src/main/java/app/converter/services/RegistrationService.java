@@ -22,4 +22,7 @@ public class RegistrationService {
         user.setRole("ROLE_USER");
         usersRepository.save(user);
     }
+    public void delete(Integer id) {
+        usersRepository.deleteById(id);
+    }
 }

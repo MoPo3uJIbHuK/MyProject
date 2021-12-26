@@ -17,5 +17,6 @@ public class CurrencyCourse {
     private int nominal;
     private String name;
     private BigDecimal value;
+    private String id;
 }
 

@@ -17,9 +17,13 @@ public class Operation {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String fromCurrency;
+    @OneToOne
+    @JoinColumn(name = "from_currency_id")
+    private Currency fromCurrency;
     private long value;
-    private String toCurrency;
+    @OneToOne
+    @JoinColumn(name = "to_currency_id")
+    private Currency toCurrency;
     private BigDecimal result;
     @OneToOne
     @JoinColumn(name = "user_user_id")
