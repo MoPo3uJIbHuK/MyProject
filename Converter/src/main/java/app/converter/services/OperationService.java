@@ -15,7 +15,7 @@ public record OperationService(OperationsRepository operationsRepository) {
     public List<Operation> getOperations() {
         return operationsRepository.findAll();
     }
-    public void saveOperation(Currency fromCurrency, long value, Currency toCurrency,
+    public void saveOperation(Currency fromCurrency, BigDecimal value, Currency toCurrency,
                               BigDecimal result, User user){
         Operation operation = Operation.builder().fromCurrency(fromCurrency)
                         .value(value).toCurrency(toCurrency).result(result)

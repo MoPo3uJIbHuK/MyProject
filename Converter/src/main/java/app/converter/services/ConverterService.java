@@ -18,13 +18,13 @@ public record ConverterService(CbrXmlMappingToCurrency currencyContext) {
                 .toList();
     }
 
-    public BigDecimal getCalculate(String from, String to, long value) {
+    public BigDecimal getCalculate(String from, String to, BigDecimal value) {
         if (from.equals(to)) {
-            return BigDecimal.valueOf(value);
+            return value;
         }
         CurrencyCourse fromCurrency = currencyContext.getCurrenciesCourse().get(from);
         CurrencyCourse toCurrency = currencyContext.getCurrenciesCourse().get(to);
-        return BigDecimal.valueOf(value).multiply(BigDecimal.valueOf(toCurrency.getNominal()))
+        return value.multiply(BigDecimal.valueOf(toCurrency.getNominal()))
                 .multiply(fromCurrency.getValue()).divide(BigDecimal.valueOf(fromCurrency.getNominal()))
                 .divide(toCurrency.getValue(), 2, RoundingMode.CEILING);
     }

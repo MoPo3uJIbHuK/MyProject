@@ -50,8 +50,8 @@ public class ConverterController {
     @PostMapping
     public String makeConverter(@RequestParam(value = "sourceCharCode") String source,
                                 @RequestParam(value = "destinationCharCode") String destination,
-                                @RequestParam(value = "value", required = false, defaultValue = "0") long value, Model model) {
-        value = Math.abs(value);
+                                @RequestParam(value = "value", required = false, defaultValue = "0") BigDecimal value, Model model) {
+        value = value.abs();
         BigDecimal result = converterService.getCalculate(source, destination, value);
         model.addAttribute("result", result);
         model.addAttribute("value", value);
@@ -80,7 +80,7 @@ public class ConverterController {
         return userDetails.user();
     }
 
-    private void saveOperation(String fromCurrency, long value, String toCurrency,
+    private void saveOperation(String fromCurrency, BigDecimal value, String toCurrency,
                                BigDecimal result) {
         Optional<Currency> sourceCurrency = currencyGeneralService.getCurrencyFromCharCode(fromCurrency);
         Optional<Currency> destinationCurrency = currencyGeneralService.getCurrencyFromCharCode(toCurrency);

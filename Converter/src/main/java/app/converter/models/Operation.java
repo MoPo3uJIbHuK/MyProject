@@ -20,7 +20,7 @@ public class Operation {
     @OneToOne
     @JoinColumn(name = "from_currency_id")
     private Currency fromCurrency;
-    private long value;
+    private BigDecimal value;
     @OneToOne
     @JoinColumn(name = "to_currency_id")
     private Currency toCurrency;
