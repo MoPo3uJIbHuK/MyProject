@@ -3,13 +3,16 @@ package app.converter.utils;
 
 import app.converter.models.User;
 import app.converter.services.UserDetailsServiceImpl;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 @Component
-public record UserValidator(UserDetailsServiceImpl userDetailsService) implements Validator {
+@RequiredArgsConstructor
+public class UserValidator implements Validator {
+    private final UserDetailsServiceImpl userDetailsService;
 
     @Override
     public boolean supports(Class<?> clazz) {

@@ -7,9 +7,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @Log4j2
@@ -23,16 +22,16 @@ public class CurrencyGeneralService {
         this.currencyContext = currencyContext;
     }
 
-    public List<Currency> getCurrencyGeneral() {
-        List<Currency> currencyList = currencyRepository.findAll();
-        if (currencyList.isEmpty()) {
-            fillStorage(currencyList);
-            return currencyRepository.findAll();
+    public Set<Currency> getCurrencyGeneral() {
+        Set<Currency> currencySet = new LinkedHashSet<>(currencyRepository.findAll());
+        if (currencySet.isEmpty()) {
+            fillStorage(currencySet);
+            return new LinkedHashSet<>(currencyRepository.findAll());
         }
-        return currencyList;
+        return currencySet;
     }
 
-    public void fillStorage(List currencyList) {
+    public void fillStorage(Set currencyList) {
         Set<Currency> currencySet = currencyContext.getCurrencyGeneral();
         currencySet.stream().filter(currency -> !currencyList.contains(currency))
                 .forEach(currencyRepository::save);

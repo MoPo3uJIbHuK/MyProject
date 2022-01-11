@@ -3,11 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Converters Story</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <style>
+        body {
+            font-size: 90%;
+        }
+
         .general {
             position: absolute;
             left: 50%;
-            top: 50%;
+            top: 55%;
             transform: translate(-50%, -50%);
         }
 
@@ -37,10 +43,13 @@
 <body>
 <div class="general">
     <form method="GET" th:action="@{/converters}">
-        <input type="submit" value="Главная">
+        <button class="btn btn-primary mt-2" type="submit">На главную страницу</button>
+    </form>
+    <form method="POST" th:action="@{/logout}">
+        <button class="btn btn-primary mt-2" type="submit">Выход из пользователя</button>
     </form>
     <hr>
-    <h2>История операций</h2>
+    <h1>История операций</h1>
     <hr>
     <div class="operational">
         <table>

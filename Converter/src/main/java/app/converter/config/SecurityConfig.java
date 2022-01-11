@@ -19,14 +19,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/auth/login", "/auth/registration", "/error","/logout").permitAll()
-                .anyRequest().hasAnyRole("USER", "ADMIN")
-                .and().formLogin().loginPage("/auth/login")
-                .loginProcessingUrl("/process_login")
-                .defaultSuccessUrl("/converters", true)
-                .failureUrl("/auth/login?error").and().logout()
-                .logoutUrl("/logout").logoutSuccessUrl("/auth/login");
+        http.authorizeRequests().anyRequest().hasAnyRole("USER","ADMIN")
+                .and().formLogin().defaultSuccessUrl("/converters",true);
     }
 
     @Override
@@ -37,4 +31,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public PasswordEncoder getPasswordEncoder(){
         return new BCryptPasswordEncoder();
     }
+
+
 }
